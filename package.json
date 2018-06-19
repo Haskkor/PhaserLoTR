@@ -1,0 +1,23 @@
+{
+  "name": "phaser-lotr",
+  "version": "0.0.1",
+  "description": "Phaser test",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -p 1954"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haskkor/PhaserLoTR.git"
+  },
+  "author": "Jeremy Farnault <farnaultjeremy@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Haskkor/PhaserLoTR/issues"
+  },
+  "homepage": "https://github.com/Haskkor/PhaserLoTR#readme",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "phaser": "^3.10.1"
+  }
+}
