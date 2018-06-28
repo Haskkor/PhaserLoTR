@@ -49,10 +49,10 @@
     this.add.image(0, 0, 'sky').setOrigin(0, 0)
     this.add.image(0, 0, 'star').setOrigin(0, 0)
     const platforms = this.physics.add.staticGroup()
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody()
-    platforms.create(600, 400, 'ground')
-    platforms.create(50, 250, 'ground')
-    platforms.create(750, 220, 'ground')
+    platforms.create(0, 568, 'ground').setOrigin(0, 0).setScale(2).refreshBody()
+    platforms.create(400, 400, 'ground').setOrigin(0, 0)
+    platforms.create(-150, 250, 'ground').setOrigin(0, 0)
+    platforms.create(550, 220, 'ground').setOrigin(0 ,0)
   }
 
   function update () {
