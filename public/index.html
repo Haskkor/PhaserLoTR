@@ -1,55 +1,20 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8"/>
-    <title>Test</title>
+    <meta charset="UTF-8">
+    <title>Tower defense game with Phaser 3</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <script src="//cdn.jsdelivr.net/npm/phaser@3.1.1/dist/phaser.js"></script>
-    <style type="text/css">
+    <script src="game.js"></script>
+    <style>
+        html,
         body {
             margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
-
-<script type="text/javascript">
-
-    const config = {
-        type: Phaser.AUTO,
-        parent: 'content',
-        width: 640,
-        height: 512,
-        scene: {
-            key: 'main',
-            preload: preload,
-            create: create,
-            update: update
-        }
-    }
-
-    function preload() {
-        this.load.atlas('sprites', '/assets/spritesheet.png', '/assets/spritesheet.json');
-        this.load.image('bullet', '/assets/bullet.png');
-    }
-
-    function create() {
-        const graphics = this.add.graphics()
-
-        const path = this.add.path(96, -32)
-        path.lineTo(96, 164)
-        path.lineTo(480, 164)
-        path.lineTo(480, 544)
-
-        graphics.lineStyle(3, 0xffffff, 1)
-
-        path.draw(graphics)
-    }
-
-    function update() {
-
-    }
-
-</script>
-
+<div id="content" style="display: block; width: 100%; text-align: center"></div>
 </body>
 </html>
