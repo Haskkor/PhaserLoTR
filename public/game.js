@@ -15,6 +15,17 @@ const game = new Phaser.Game(config)
 let enemies
 let path
 
+const map = [
+  [0, -1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, -1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, -1, -1, -1, -1, -1, -1, -1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, -1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, -1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, -1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, -1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, -1, 0, 0]
+];
+
 const ENEMY_SPEED = 1 / 10000
 
 const Enemy = new Phaser.Class({
@@ -59,6 +70,18 @@ const Turret = new Phaser.Class({
   }
 })
 
+const Bullet = new Phaser.Class({
+  Extends: Phaser.GameObjects.Image,
+
+  initialize: function Bullet (scene) {
+    Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
+    this.dx = 0;
+    this.dy = 0;
+    this.lifespan = 0;
+    this.speed = Phaser.Math.GetSpeed(600, 1);
+  }
+})
+
 function preload () {
   this.load.atlas('sprites', 'assets/spritesheet.png', 'assets/spritesheet.json')
   this.load.image('bullet', 'assets/bullet.png')
@@ -78,6 +101,9 @@ function create () {
 
   enemies = this.add.group({classType: Enemy, runChildUpdate: true})
   turrets = this.add.group({classType: Turret, runChildUpdate: true})
+
+  this.input.on('pointerdown', placeTurret);
+
   this.nextEnemy = 0
 }
 
@@ -105,4 +131,21 @@ function drawGrid (graphics) {
     graphics.lineTo(j * 64, 512)
   }
   graphics.strokePath()
+}
+
+function placeTurret(pointer) {
+  let i = Math.floor(pointer.y / 64);
+  let j = Math.floor(pointer.x / 64);
+  if (canPlaceTurret(i, j)) {
+    const turret = turrets.get()
+    if (turret) {
+      turret.setActive(true);
+      turret.setVisible(true);
+      turret.place(i, j);
+    }
+  }
+}
+
+function canPlaceTurret(i, j) {
+  return map[i][j] === 0;
 }
