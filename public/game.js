@@ -32,6 +32,7 @@ const map = [
 ]
 
 const ENEMY_SPEED = 1 / 10000
+const BULLET_DAMAGE = 50
 
 const Enemy = new Phaser.Class({
   Extends: Phaser.GameObjects.Image,
@@ -57,7 +58,7 @@ const Enemy = new Phaser.Class({
   },
   receiveDamage: function (damage) {
     this.hp -= damage
-    if (this.hp <= 100) {
+    if (this.hp <= 0) {
       this.setActive(false)
       this.setVisible(false)
     }
@@ -145,6 +146,8 @@ function create () {
   this.input.on('pointerdown', placeTurret)
 
   this.nextEnemy = 0
+
+  this.physics.add.overlap(enemies, bullets, damageEnemy)
 }
 
 function update (time, delta) {
@@ -205,4 +208,12 @@ function getEnemy (x, y, distance) {
     }
   }
   return false
+}
+
+function damageEnemy (enemy, bullet) {
+  if (enemy.active && bullet.active) {
+    bullet.setActive(false)
+    bullet.setVisible(false)
+    enemy.receiveDamage(BULLET_DAMAGE)
+  }
 }
